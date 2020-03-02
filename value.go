@@ -1155,13 +1155,6 @@ func (vlog *valueLog) pickLog(head valuePointer, tr trace.Trace) (files []*logFi
 	}
 	vlog.lfDiscardStats.Unlock()
 
-	if candidate.fid != math.MaxUint32 { // Found a candidate
-		tr.LazyPrintf("Found candidate via discard stats: %v", candidate)
-		files = append(files, vlog.filesMap[candidate.fid])
-	} else {
-		tr.LazyPrintf("Could not find candidate via discard stats. Randomly picking one.")
-	}
-
 	// Fallback to randomly picking a log file
 	var idxHead int
 	for i, fid := range fids {
@@ -1170,16 +1163,17 @@ func (vlog *valueLog) pickLog(head valuePointer, tr trace.Trace) (files []*logFi
 			break
 		}
 	}
+
 	if idxHead == 0 { // Not found or first file
 		tr.LazyPrintf("Could not find any file.")
 		return nil
 	}
-	idx := rand.Intn(idxHead) // Don’t include head.Fid. We pick a random file before it.
-	if idx > 0 {
-		idx = rand.Intn(idx + 1) // Another level of rand to favor smaller fids.
+
+	for i := 0; i < idxHead; i++ {
+		tr.LazyPrintf("Adding fid: %d", fids[i])
+		files = append(files, vlog.filesMap[fids[i]])
 	}
-	tr.LazyPrintf("Randomly chose fid: %d", fids[idx])
-	files = append(files, vlog.filesMap[fids[idx]])
+
 	return files
 }
 
