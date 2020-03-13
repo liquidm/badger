@@ -30,7 +30,7 @@ import (
 	"golang.org/x/net/trace"
 
 	"github.com/dgraph-io/badger/v2/pb"
-	"github.com/dgraph-io/badger/v2/table"
+	"github.com/liquidm/badger/v2/table"
 	"github.com/dgraph-io/badger/v2/y"
 	"github.com/pkg/errors"
 )

@@ -33,7 +33,7 @@ import (
 	"github.com/dgraph-io/badger/v2/options"
 	"github.com/dgraph-io/badger/v2/pb"
 	"github.com/dgraph-io/badger/v2/skl"
-	"github.com/dgraph-io/badger/v2/table"
+	"github.com/liquidm/badger/v2/table"
 	"github.com/dgraph-io/badger/v2/y"
 	"github.com/dgraph-io/ristretto"
 	humanize "github.com/dustin/go-humanize"

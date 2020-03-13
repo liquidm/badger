@@ -20,7 +20,7 @@ import (
 	"time"
 
 	"github.com/dgraph-io/badger/v2/options"
-	"github.com/dgraph-io/badger/v2/table"
+	"github.com/liquidm/badger/v2/table"
 )
 
 // Note: If you add a new option X make sure you also add a WithX method on Options.
