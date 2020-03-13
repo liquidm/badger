@@ -1,4 +1,4 @@
-module github.com/dgraph-io/badger/v2
+module github.com/liquidm/badger/v2
 
 go 1.12
 
