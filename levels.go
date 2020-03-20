@@ -30,8 +30,8 @@ import (
 	"golang.org/x/net/trace"
 
 	"github.com/dgraph-io/badger/v2/pb"
-	"github.com/liquidm/badger/v2/table"
 	"github.com/dgraph-io/badger/v2/y"
+	"github.com/liquidm/badger/v2/table"
 	"github.com/pkg/errors"
 )
 
@@ -577,7 +577,7 @@ func (s *levelsController) compactBuildTables(
 				// - We've already processed `NumVersionsToKeep` number of versions
 				// (including the current item being processed)
 				lastValidVersion := vs.Meta&bitDiscardEarlierVersions > 0 ||
-					numVersions == s.kv.opt.NumVersionsToKeep
+					(numVersions == s.kv.opt.NumVersionsToKeep && numVersions > 1)
 
 				if isDeletedOrExpired(vs.Meta, vs.ExpiresAt) || lastValidVersion {
 					// If this version of the key is deleted or expired, skip all the rest of the
